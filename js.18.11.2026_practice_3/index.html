@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="placeholder"></div>
+
+    <script>
+        function Book(title, author, year, pages, isTaken) {
+            this.title = title;
+            this.author = author;
+            this.year = year;
+            this.pages = pages;
+            this.isTaken = isTaken;
+        }
+
+        Book.prototype.showBookInfo = function(element) {
+            element.insertAdjacentHTML("beforeend", `Название книги: ${this.title}<br />`);
+            element.insertAdjacentHTML("beforeend", `Автор книги: ${this.author}<br />`);
+            element.insertAdjacentHTML("beforeend", `Год выпуска: ${this.year}<br />`);
+            element.insertAdjacentHTML("beforeend", `Количество страниц: ${this.pages}<br />`);
+            element.insertAdjacentHTML("beforeend", `Наличие: ${this.isTaken}<br />`);
+        };
+
+        Book.prototype.takeBook = function() {
+            if (this.isTaken == false) {
+                this.isTaken = true;
+            }
+        };
+
+        Book.prototype.returnBook = function() {
+            if (this.isTaken == true) {
+                this.isTaken = false;
+            }
+        };
+
+        Book.prototype.changeTitle = function(newTitle) {
+            this.title = newTitle;
+        };
+
+        Book.prototype.changeAuthor = function(newAuthor) {
+            this.author = newAuthor;
+        };
+
+        Book.prototype.getAge = function() {
+            return 2026 - this.year;
+        };
+
+        Book.prototype.yearPerThis = function() {
+            let age = 2026 - this.year;
+            console.log(age);
+        };
+
+        let book1 = new Book("Harry Potter", "Joahne Roaling", 2001, 525, false);
+
+        book1.changeTitle("Harry Potter 2");
+        book1.yearPerThis();
+        book1.showBookInfo(placeholder);
+
+
+
+    </script>
+</body>
+</html>

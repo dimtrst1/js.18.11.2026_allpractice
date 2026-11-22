@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="placeholder1"></div>
+    <br>
+    <div id="placeholder2"></div>
+    <br>
+    <div id="placeholder3"></div>
+
+    <script>
+        function Product(name, price, quantity, category) {
+            this.name = name;
+            this.price = price
+            this.quantity = quantity;
+            this.category = category;
+            this.discount = 0;
+        }
+
+        Product.prototype.showInfo = function(element) {
+            element.insertAdjacentHTML("beforeend", `Название продукта: ${this.name}<br />`);
+            element.insertAdjacentHTML("beforeend", `Цена: ${this.price}<br />`);
+            element.insertAdjacentHTML("beforeend", `Количество: ${this.quantity}<br />`);
+            element.insertAdjacentHTML("beforeend", `Категория: ${this.category}<br />`);
+            element.insertAdjacentHTML("beforeend", `Скидка: ${this.discount}<br />`);
+        };
+
+        Product.prototype.setDiscount = function(percent) {
+            this.discount = percent;
+        }; 
+
+        Product.prototype.getPriceWithDiscount = function() {
+            return this.price - (this.price * this.discount / 100);
+        };
+
+        Product.prototype.buy = function(count) {
+            if (count > 0 && count <= this.quantity) {
+                this.quantity = this.quantity - count;
+            }
+        };
+
+        Product.prototype.addToStock = function(count) {
+            if (count > 0) {
+                this.quantity = this.quantity + count;
+            }
+        };
+
+        Product.prototype.changePrice = function(newPrice) {
+            this.price = newPrice;
+        };
+
+        Product.prototype.isAvailable = function() {
+            return this.quantity > 0;
+        };
+
+        let product1 = new Product("Iphone", 1500, 3, "Phone", 0);
+        let product2 = new Product("Macbook", 3000, 2, "Notebook", 0);
+        let product3 = new Product("Ipad", 1000, 5, "Tablet", 0);
+
+        product1.changePrice(5000);
+        product1.setDiscount(10);
+        product1.addToStock(3);
+        product1.buy(1);
+
+        product1.showInfo(placeholder1);
+        product2.showInfo(placeholder2);
+        product3.showInfo(placeholder3);
+    </script>
+</body>
+</html>
